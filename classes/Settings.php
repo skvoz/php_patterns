@@ -1,53 +1,40 @@
 <?php
 
-//protected static $instances;
-//
-//protected function __construct() { }
-//
-//final private function __clone() { }
-//
-//    public static function getInstance() {
-//    $class = get_called_class();
-//
-//    if (!isset(self::$instances[$class])) {
-//        self::$instances[$class] = new $class;
-//    }
-//    return self::$instances[$class];
-//}
-
-
 class Settings
 {
-    private $settings = array();
-    private static $instances = null;
+    /** static variable instance class
+     * @var Settings
+     */
+    private static $_instance ;
 
-    private function __construct()
-    {
-// приватный конструктор ограничивает реализацию getInstance ()
-    }
+    /**
+     * close function , used only inside class
+     */
+    private function __construct() {}
 
-    protected function __clone()
-    {
-// ограничивает клонирование объекта
-    }
+    /**
+     * close function , used only inside class
+     */
+    protected function __clone() {}
 
     static public function getInstance()
     {
-        $class = get_called_class();
-
-        if (!isset(self::$instances[$class])) {
-            self::$instances[$class] = new $class;
+        //check instance
+        if (null === self::$_instance) {
+            //create new instance
+            self::$_instance = new self();
         }
-        return self::$instances[$class];
+        //return instance
+        return self::$_instance;
     }
 
     public function import()
     {
-        echo 'import';
+        echo 'we use method import';
     }
 
     public function get()
     {
-        echo 'get';
+        echo 'we use method get';
     }
 }
